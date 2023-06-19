@@ -21,8 +21,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef KORTEX2_CONTROLLERS__TWIST_CONTROLLER_HPP_
-#define KORTEX2_CONTROLLERS__TWIST_CONTROLLER_HPP_
+#ifndef TWIST_CONTROLLER__TWIST_CONTROLLER_HPP_
+#define TWIST_CONTROLLER__TWIST_CONTROLLER_HPP_
 
 #include <memory>
 #include <string>
@@ -30,10 +30,10 @@
 
 #include "controller_interface/controller_interface.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
-#include "kortex2_controllers/visibility_control.h"
+#include "twist_controller/visibility_control.h"
 #include "realtime_tools/realtime_buffer.h"
 
-namespace kortex2_controllers
+namespace twist_controller
 {
 using CmdType = geometry_msgs::msg::TwistStamped;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -41,28 +41,28 @@ using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface
 class TwistController : public controller_interface::ControllerInterface
 {
 public:
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   TwistController();
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration command_interface_configuration() const override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration state_interface_configuration() const override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_init() override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  TWIST_CONTROLLER_PUBLIC
   controller_interface::return_type update(
     const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
@@ -76,6 +76,6 @@ protected:
   std::string logger_name_;
 };
 
-}  // namespace kortex2_controllers
+}  // namespace twist_controller
 
-#endif  // KORTEX2_CONTROLLERS__TWIST_CONTROLLER_HPP_
+#endif  // TWIST_CONTROLLER__TWIST_CONTROLLER_HPP_

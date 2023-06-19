@@ -21,11 +21,11 @@
  */
 //----------------------------------------------------------------------
 
-#include "kortex2_controllers/fault_controller.hpp"
+#include "fault_controller/fault_controller.hpp"
 #include <memory>
 #include "hardware_interface/loaned_command_interface.hpp"
 
-namespace kortex2_controllers
+namespace fault_controller
 {
 using hardware_interface::LoanedCommandInterface;
 
@@ -132,9 +132,9 @@ bool FaultController::resetFault(
   return resp->success;
 }
 
-}  // namespace kortex2_controllers
+}  // namespace fault_controller
 
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  kortex2_controllers::FaultController, controller_interface::ControllerInterface)
+  fault_controller::FaultController, controller_interface::ControllerInterface)

@@ -21,8 +21,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef KORTEX2_CONTROLLERS__FAULT_CONTROLLER_HPP_
-#define KORTEX2_CONTROLLERS__FAULT_CONTROLLER_HPP_
+#ifndef FAULT_CONTROLLER__FAULT_CONTROLLER_HPP_
+#define FAULT_CONTROLLER__FAULT_CONTROLLER_HPP_
 
 #include <limits>
 #include <memory>
@@ -30,10 +30,10 @@
 #include "controller_interface/controller_interface.hpp"
 #include "example_interfaces/msg/bool.hpp"
 #include "example_interfaces/srv/trigger.hpp"
-#include "kortex2_controllers/visibility_control.h"
+#include "fault_controller/visibility_control.h"
 #include "realtime_tools/realtime_publisher.h"
 
-namespace kortex2_controllers
+namespace fault_controller
 {
 enum CommandInterfaces
 {
@@ -51,28 +51,28 @@ using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface
 class FaultController : public controller_interface::ControllerInterface
 {
 public:
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   FaultController();
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration command_interface_configuration() const override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration state_interface_configuration() const override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_init() override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
-  KORTEX2_CONTROLLERS_PUBLIC
+  FAULT_CONTROLLER_PUBLIC
   controller_interface::return_type update(
     const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
@@ -90,6 +90,6 @@ private:
   static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
 };
 
-}  // namespace kortex2_controllers
+}  // namespace fault_controller
 
-#endif  // KORTEX2_CONTROLLERS__FAULT_CONTROLLER_HPP_
+#endif  // FAULT_CONTROLLER__FAULT_CONTROLLER_HPP_

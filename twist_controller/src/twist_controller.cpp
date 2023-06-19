@@ -21,7 +21,7 @@
  */
 //----------------------------------------------------------------------
 
-#include "kortex2_controllers/twist_controller.hpp"
+#include "twist_controller/twist_controller.hpp"
 
 #include <memory>
 #include <string>
@@ -30,7 +30,7 @@
 #include "controller_interface/helpers.hpp"
 #include "hardware_interface/loaned_command_interface.hpp"
 
-namespace kortex2_controllers
+namespace twist_controller
 {
 using hardware_interface::LoanedCommandInterface;
 
@@ -150,9 +150,9 @@ controller_interface::return_type TwistController::update(
 
   return controller_interface::return_type::OK;
 }
-}  // namespace kortex2_controllers
+}  // namespace twist_controller
 
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  kortex2_controllers::TwistController, controller_interface::ControllerInterface)
+  twist_controller::TwistController, controller_interface::ControllerInterface)
