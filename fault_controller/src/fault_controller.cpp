@@ -136,5 +136,4 @@ bool FaultController::resetFault(
 
 #include "pluginlib/class_list_macros.hpp"
 
-PLUGINLIB_EXPORT_CLASS(
-  fault_controller::FaultController, controller_interface::ControllerInterface)
+PLUGINLIB_EXPORT_CLASS(fault_controller::FaultController, controller_interface::ControllerInterface)
