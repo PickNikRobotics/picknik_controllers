@@ -21,21 +21,21 @@
  */
 //----------------------------------------------------------------------
 
-#include "fault_controller/fault_controller.hpp"
+#include "picknik_reset_fault_controller/picknik_reset_fault_controller.hpp"
 #include <memory>
 #include "hardware_interface/loaned_command_interface.hpp"
 
-namespace fault_controller
+namespace picknik_reset_fault_controller
 {
 using hardware_interface::LoanedCommandInterface;
 
-FaultController::FaultController()
+PicknikResetFaultController::PicknikResetFaultController()
 : controller_interface::ControllerInterface(), trigger_command_srv_(nullptr)
 {
 }
 
-controller_interface::InterfaceConfiguration FaultController::command_interface_configuration()
-  const
+controller_interface::InterfaceConfiguration
+PicknikResetFaultController::command_interface_configuration() const
 {
   controller_interface::InterfaceConfiguration config;
   config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
@@ -46,7 +46,8 @@ controller_interface::InterfaceConfiguration FaultController::command_interface_
   return config;
 }
 
-controller_interface::InterfaceConfiguration FaultController::state_interface_configuration() const
+controller_interface::InterfaceConfiguration
+PicknikResetFaultController::state_interface_configuration() const
 {
   controller_interface::InterfaceConfiguration config;
   config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
@@ -56,9 +57,9 @@ controller_interface::InterfaceConfiguration FaultController::state_interface_co
   return config;
 }
 
-CallbackReturn FaultController::on_init() { return CallbackReturn::SUCCESS; }
+CallbackReturn PicknikResetFaultController::on_init() { return CallbackReturn::SUCCESS; }
 
-controller_interface::return_type FaultController::update(
+controller_interface::return_type PicknikResetFaultController::update(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   if (realtime_publisher_ && realtime_publisher_->trylock())
@@ -71,12 +72,14 @@ controller_interface::return_type FaultController::update(
   return controller_interface::return_type::OK;
 }
 
-CallbackReturn FaultController::on_configure(const rclcpp_lifecycle::State & /*previous_state*/)
+CallbackReturn PicknikResetFaultController::on_configure(
+  const rclcpp_lifecycle::State & /*previous_state*/)
 {
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn FaultController::on_activate(const rclcpp_lifecycle::State & /*previous_state*/)
+CallbackReturn PicknikResetFaultController::on_activate(
+  const rclcpp_lifecycle::State & /*previous_state*/)
 {
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(NO_CMD);
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(NO_CMD);
@@ -93,13 +96,15 @@ CallbackReturn FaultController::on_activate(const rclcpp_lifecycle::State & /*pr
     return CallbackReturn::ERROR;
   }
   trigger_command_srv_ = get_node()->create_service<example_interfaces::srv::Trigger>(
-    "~/reset_fault",
-    std::bind(&FaultController::resetFault, this, std::placeholders::_1, std::placeholders::_2));
+    "~/reset_fault", std::bind(
+                       &PicknikResetFaultController::resetFault, this, std::placeholders::_1,
+                       std::placeholders::_2));
 
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn FaultController::on_deactivate(const rclcpp_lifecycle::State & /*previous_state*/)
+CallbackReturn PicknikResetFaultController::on_deactivate(
+  const rclcpp_lifecycle::State & /*previous_state*/)
 {
   trigger_command_srv_.reset();
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(NO_CMD);
@@ -108,7 +113,7 @@ CallbackReturn FaultController::on_deactivate(const rclcpp_lifecycle::State & /*
   return CallbackReturn::SUCCESS;
 }
 
-bool FaultController::resetFault(
+bool PicknikResetFaultController::resetFault(
   const CmdType::Request::SharedPtr /*req*/, CmdType::Response::SharedPtr resp)
 {
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(ASYNC_WAITING);
@@ -132,8 +137,10 @@ bool FaultController::resetFault(
   return resp->success;
 }
 
-}  // namespace fault_controller
+}  // namespace picknik_reset_fault_controller
 
 #include "pluginlib/class_list_macros.hpp"
 
-PLUGINLIB_EXPORT_CLASS(fault_controller::FaultController, controller_interface::ControllerInterface)
+PLUGINLIB_EXPORT_CLASS(
+  picknik_reset_fault_controller::PicknikResetFaultController,
+  controller_interface::ControllerInterface)
