@@ -30,8 +30,8 @@
 
 #include "controller_interface/controller_interface.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
-#include "twist_controller/visibility_control.h"
 #include "realtime_tools/realtime_buffer.h"
+#include "twist_controller/visibility_control.h"
 
 namespace twist_controller
 {

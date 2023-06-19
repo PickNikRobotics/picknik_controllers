@@ -154,5 +154,4 @@ controller_interface::return_type TwistController::update(
 
 #include "pluginlib/class_list_macros.hpp"
 
-PLUGINLIB_EXPORT_CLASS(
-  twist_controller::TwistController, controller_interface::ControllerInterface)
+PLUGINLIB_EXPORT_CLASS(twist_controller::TwistController, controller_interface::ControllerInterface)
