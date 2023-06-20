@@ -21,8 +21,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef TWIST_CONTROLLER__TWIST_CONTROLLER_HPP_
-#define TWIST_CONTROLLER__TWIST_CONTROLLER_HPP_
+#ifndef PICKNIK_TWIST_CONTROLLER__PICKNIK_TWIST_CONTROLLER_HPP_
+#define PICKNIK_TWIST_CONTROLLER__PICKNIK_TWIST_CONTROLLER_HPP_
 
 #include <memory>
 #include <string>
@@ -30,39 +30,39 @@
 
 #include "controller_interface/controller_interface.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
+#include "picknik_twist_controller/visibility_control.h"
 #include "realtime_tools/realtime_buffer.h"
-#include "twist_controller/visibility_control.h"
 
-namespace twist_controller
+namespace picknik_twist_controller
 {
 using CmdType = geometry_msgs::msg::TwistStamped;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
-class TwistController : public controller_interface::ControllerInterface
+class PicknikTwistControler : public controller_interface::ControllerInterface
 {
 public:
-  TWIST_CONTROLLER_PUBLIC
-  TwistController();
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
+  PicknikTwistControler();
 
-  TWIST_CONTROLLER_PUBLIC
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration command_interface_configuration() const override;
 
-  TWIST_CONTROLLER_PUBLIC
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration state_interface_configuration() const override;
 
-  TWIST_CONTROLLER_PUBLIC
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_init() override;
 
-  TWIST_CONTROLLER_PUBLIC
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
 
-  TWIST_CONTROLLER_PUBLIC
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
-  TWIST_CONTROLLER_PUBLIC
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
-  TWIST_CONTROLLER_PUBLIC
+  PICKNIK_TWIST_CONTROLLER_PUBLIC
   controller_interface::return_type update(
     const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
@@ -76,6 +76,6 @@ protected:
   std::string logger_name_;
 };
 
-}  // namespace twist_controller
+}  // namespace picknik_twist_controller
 
-#endif  // TWIST_CONTROLLER__TWIST_CONTROLLER_HPP_
+#endif  // PICKNIK_TWIST_CONTROLLER__PICKNIK_TWIST_CONTROLLER_HPP_

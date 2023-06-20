@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.8)
-project(twist_controller)
+cmake_minimum_required(VERSION 3.16)
+project(picknik_twist_controller)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -23,7 +23,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
 
 include_directories(include)
 
-add_library(${PROJECT_NAME} SHARED src/twist_controller.cpp)
+add_library(${PROJECT_NAME} SHARED src/picknik_twist_controller.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE
   include
 )
@@ -34,7 +34,7 @@ ament_target_dependencies(${PROJECT_NAME}
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
-target_compile_definitions(${PROJECT_NAME} PRIVATE "KORTEX2_CONTROLLERS_BUILDING_LIBRARY")
+target_compile_definitions(${PROJECT_NAME} PRIVATE "PICKNIK_TWIST_CONTROLLER_BUILDING_LIBRARY")
 pluginlib_export_plugin_description_file(controller_interface controller_plugins.xml)
 
 install(TARGETS ${PROJECT_NAME}
