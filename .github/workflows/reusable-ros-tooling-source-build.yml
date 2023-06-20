@@ -37,7 +37,7 @@ jobs:
           target-ros2-distro: ${{ inputs.ros_distro }}
           # build all packages listed in the meta package
           package-name:
-            fault_controller
+            picknik_reset_fault_controller
 
           vcs-repo-file-url: |
             https://raw.githubusercontent.com/ros2/ros2/${{ inputs.ros2_repo_branch }}/ros2.repos

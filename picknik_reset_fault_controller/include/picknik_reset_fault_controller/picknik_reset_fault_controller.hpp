@@ -21,8 +21,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef FAULT_CONTROLLER__FAULT_CONTROLLER_HPP_
-#define FAULT_CONTROLLER__FAULT_CONTROLLER_HPP_
+#ifndef PICKNIK_RESET_FAULT_CONTROLLER__PICKNIK_RESET_FAULT_CONTROLLER_HPP_
+#define PICKNIK_RESET_FAULT_CONTROLLER__PICKNIK_RESET_FAULT_CONTROLLER_HPP_
 
 #include <limits>
 #include <memory>
@@ -30,10 +30,10 @@
 #include "controller_interface/controller_interface.hpp"
 #include "example_interfaces/msg/bool.hpp"
 #include "example_interfaces/srv/trigger.hpp"
-#include "fault_controller/visibility_control.h"
+#include "picknik_reset_fault_controller/visibility_control.h"
 #include "realtime_tools/realtime_publisher.h"
 
-namespace fault_controller
+namespace picknik_reset_fault_controller
 {
 enum CommandInterfaces
 {
@@ -48,31 +48,31 @@ using CmdType = example_interfaces::srv::Trigger;
 using FbkType = example_interfaces::msg::Bool;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
-class FaultController : public controller_interface::ControllerInterface
+class PicknikResetFaultController : public controller_interface::ControllerInterface
 {
 public:
-  FAULT_CONTROLLER_PUBLIC
-  FaultController();
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
+  PicknikResetFaultController();
 
-  FAULT_CONTROLLER_PUBLIC
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration command_interface_configuration() const override;
 
-  FAULT_CONTROLLER_PUBLIC
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration state_interface_configuration() const override;
 
-  FAULT_CONTROLLER_PUBLIC
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_init() override;
 
-  FAULT_CONTROLLER_PUBLIC
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state) override;
 
-  FAULT_CONTROLLER_PUBLIC
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
-  FAULT_CONTROLLER_PUBLIC
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
-  FAULT_CONTROLLER_PUBLIC
+  PICKNIK_RESET_FAULT_CONTROLLER_PUBLIC
   controller_interface::return_type update(
     const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
@@ -90,6 +90,6 @@ private:
   static constexpr double NO_CMD = std::numeric_limits<double>::quiet_NaN();
 };
 
-}  // namespace fault_controller
+}  // namespace picknik_reset_fault_controller
 
-#endif  // FAULT_CONTROLLER__FAULT_CONTROLLER_HPP_
+#endif  // PICKNIK_RESET_FAULT_CONTROLLER__PICKNIK_RESET_FAULT_CONTROLLER_HPP_
