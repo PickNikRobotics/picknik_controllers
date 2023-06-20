@@ -119,7 +119,7 @@ bool PicknikResetFaultController::resetFault(
   command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].set_value(ASYNC_WAITING);
   command_interfaces_[CommandInterfaces::RESET_FAULT_CMD].set_value(ISSUE_CMD);
 
-  RCLCPP_INFO(get_node()->get_logger(), "Trying to reset faults on kinova controller.");
+  RCLCPP_INFO(get_node()->get_logger(), "Trying to reset faults on hardware controller.");
 
   while (command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_value() ==
          ASYNC_WAITING)
@@ -131,7 +131,7 @@ bool PicknikResetFaultController::resetFault(
     command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_value());
 
   RCLCPP_INFO(
-    get_node()->get_logger(), "Resetting fault on kinova controller '%s'!",
+    get_node()->get_logger(), "Resetting fault on hardware controller '%s'!",
     resp->success ? "succeeded" : "failed");
 
   return resp->success;

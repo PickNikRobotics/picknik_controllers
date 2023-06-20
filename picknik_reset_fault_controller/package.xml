@@ -3,10 +3,12 @@
 <package format="3">
   <name>picknik_reset_fault_controller</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>
+    ROS 2 controller that offers a service to clear faults in a hardware interface
+  </description>
   <author email="lovro.ivanov@gmail.com">lovro</author>
   <maintainer email="alex.moriarty@picknik.ai">Alex Moriarty</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake_ros</buildtool_depend>
 
