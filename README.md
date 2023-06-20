@@ -8,7 +8,7 @@ The controllers have been prefixed with `picknik_` so that when they eventually 
 
 
 ## PicknikTwistController
-Generic ROS2 controller to forward cartesian twist commands. 
+Generic ROS2 controller to forward cartesian twist commands.
 We plan to land this upstream in ros2_controllers: https://github.com/ros-controls/ros2_controllers/pull/300
 
 ### Usage
