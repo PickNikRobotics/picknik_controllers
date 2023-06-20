@@ -14,7 +14,7 @@ We plan to land this upstream in ros2_controllers: https://github.com/ros-contro
 ### Usage
 Example of instance within `ros2_control` can be found in the [configuration file](https://github.com/PickNikRobotics/ros2_kortex/blob/main/kortex_description/arms/gen3/7dof/config/ros2_controllers.yaml).
 Defined interfaces have to exist within the `hardware_interface::SystemInterface` implemented for the robot (e.g. driver).
-Stop any commanding controller and then start `TwistController`to use kinova's builtin cartesian twist controller.
+Stop any commanding controller and then start `PicknikTwistController`to use kinova's builtin cartesian twist controller.
 
 #### Note on controllers
 Exclusiveness logic is within the driver, and running joint-based and twist controller at the same time is not possible.

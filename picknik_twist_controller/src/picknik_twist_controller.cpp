@@ -21,7 +21,7 @@
  */
 //----------------------------------------------------------------------
 
-#include "twist_controller/twist_controller.hpp"
+#include "picknik_twist_controller/picknik_twist_controller.hpp"
 
 #include <memory>
 #include <string>
@@ -30,19 +30,19 @@
 #include "controller_interface/helpers.hpp"
 #include "hardware_interface/loaned_command_interface.hpp"
 
-namespace twist_controller
+namespace picknik_twist_controller
 {
 using hardware_interface::LoanedCommandInterface;
 
-TwistController::TwistController()
+PicknikTwistControler::PicknikTwistControler()
 : controller_interface::ControllerInterface(),
   rt_command_ptr_(nullptr),
   twist_command_subscriber_(nullptr)
 {
 }
 
-controller_interface::InterfaceConfiguration TwistController::command_interface_configuration()
-  const
+controller_interface::InterfaceConfiguration
+PicknikTwistControler::command_interface_configuration() const
 {
   controller_interface::InterfaceConfiguration command_interfaces_config;
   command_interfaces_config.type = controller_interface::interface_configuration_type::INDIVIDUAL;
@@ -55,13 +55,14 @@ controller_interface::InterfaceConfiguration TwistController::command_interface_
   return command_interfaces_config;
 }
 
-controller_interface::InterfaceConfiguration TwistController::state_interface_configuration() const
+controller_interface::InterfaceConfiguration PicknikTwistControler::state_interface_configuration()
+  const
 {
   return controller_interface::InterfaceConfiguration{
     controller_interface::interface_configuration_type::NONE};
 }
 
-CallbackReturn TwistController::on_init()
+CallbackReturn PicknikTwistControler::on_init()
 {
   try
   {
@@ -78,7 +79,8 @@ CallbackReturn TwistController::on_init()
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State & /*previous_state*/)
+CallbackReturn PicknikTwistControler::on_configure(
+  const rclcpp_lifecycle::State & /*previous_state*/)
 {
   joint_name_ = get_node()->get_parameter("joint").as_string();
 
@@ -108,21 +110,23 @@ CallbackReturn TwistController::on_configure(const rclcpp_lifecycle::State & /*p
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn TwistController::on_activate(const rclcpp_lifecycle::State & /*previous_state*/)
+CallbackReturn PicknikTwistControler::on_activate(
+  const rclcpp_lifecycle::State & /*previous_state*/)
 {
   // reset command buffer if a command came through callback when controller was inactive
   rt_command_ptr_ = realtime_tools::RealtimeBuffer<std::shared_ptr<CmdType>>(nullptr);
   return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn TwistController::on_deactivate(const rclcpp_lifecycle::State & /*previous_state*/)
+CallbackReturn PicknikTwistControler::on_deactivate(
+  const rclcpp_lifecycle::State & /*previous_state*/)
 {
   // reset command buffer
   rt_command_ptr_ = realtime_tools::RealtimeBuffer<std::shared_ptr<CmdType>>(nullptr);
   return CallbackReturn::SUCCESS;
 }
 
-controller_interface::return_type TwistController::update(
+controller_interface::return_type PicknikTwistControler::update(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   auto twist_commands = rt_command_ptr_.readFromRT();
@@ -150,8 +154,9 @@ controller_interface::return_type TwistController::update(
 
   return controller_interface::return_type::OK;
 }
-}  // namespace twist_controller
+}  // namespace picknik_twist_controller
 
 #include "pluginlib/class_list_macros.hpp"
 
-PLUGINLIB_EXPORT_CLASS(twist_controller::TwistController, controller_interface::ControllerInterface)
+PLUGINLIB_EXPORT_CLASS(
+  picknik_twist_controller::PicknikTwistControler, controller_interface::ControllerInterface)
