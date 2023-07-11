@@ -2,8 +2,8 @@
 Changelog for package picknik_reset_fault_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.1 (2023-07-11)
+------------------
 * Initial Release of picknik_reset_fault_controller
   * Originally this was used internally and there was an attempt to release it to ros2_controllers
   * After discussion with the ros2 controllers WG over slack we have decided to open source it here first

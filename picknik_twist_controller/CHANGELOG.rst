@@ -2,8 +2,8 @@
 Changelog for package picknik_twist_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.1 (2023-07-11)
+------------------
 * Initial Release of picknik_twist_controller
   * Originally this was used internally and there was an attempt to release it to ros2_controllers here: https://github.com/ros-controls/ros2_controllers/pull/300
   * The goal is to still move this upstream but it needs to be refactored before going upstream.
