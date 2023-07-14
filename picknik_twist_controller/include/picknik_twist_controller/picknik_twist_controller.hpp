@@ -38,11 +38,11 @@ namespace picknik_twist_controller
 using CmdType = geometry_msgs::msg::TwistStamped;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
-class PicknikTwistControler : public controller_interface::ControllerInterface
+class PicknikTwistController : public controller_interface::ControllerInterface
 {
 public:
   PICKNIK_TWIST_CONTROLLER_PUBLIC
-  PicknikTwistControler();
+  PicknikTwistController();
 
   PICKNIK_TWIST_CONTROLLER_PUBLIC
   controller_interface::InterfaceConfiguration command_interface_configuration() const override;
