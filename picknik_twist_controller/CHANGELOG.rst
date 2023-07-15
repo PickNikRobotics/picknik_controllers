@@ -2,8 +2,8 @@
 Changelog for package picknik_twist_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2023-07-14)
+------------------
 * fix typo (`#10 <https://github.com/PickNikRobotics/picknik_controllers/issues/10>`_)
   ABI breaking change fixes a typo from original internal package rename for open sourcing
   PicknikTwistControler -> PicknikTwistController
