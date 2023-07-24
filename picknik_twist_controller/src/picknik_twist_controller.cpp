@@ -145,12 +145,12 @@ controller_interface::return_type PicknikTwistController::update(
       command_interfaces_.size());
     return controller_interface::return_type::ERROR;
   }
-  command_interfaces_[0].set_value((*twist_commands)->twist.linear.x);
-  command_interfaces_[1].set_value((*twist_commands)->twist.linear.y);
-  command_interfaces_[2].set_value((*twist_commands)->twist.linear.z);
-  command_interfaces_[3].set_value((*twist_commands)->twist.angular.x);
-  command_interfaces_[4].set_value((*twist_commands)->twist.angular.y);
-  command_interfaces_[5].set_value((*twist_commands)->twist.angular.z);
+  command_interfaces_[0].set_value((*twist_commands)->linear.x);
+  command_interfaces_[1].set_value((*twist_commands)->linear.y);
+  command_interfaces_[2].set_value((*twist_commands)->linear.z);
+  command_interfaces_[3].set_value((*twist_commands)->angular.x);
+  command_interfaces_[4].set_value((*twist_commands)->angular.y);
+  command_interfaces_[5].set_value((*twist_commands)->angular.z);
 
   return controller_interface::return_type::OK;
 }

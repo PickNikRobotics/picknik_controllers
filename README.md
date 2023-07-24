@@ -24,7 +24,7 @@ Controller Manager (`ros2_control`) will try to activate both on request, but th
 ros2 control switch_controllers --activate streaming_controller --deactivate joint_trajectory_controller
 ```
 
-By publishing `geometry_msgs::msg::TwistStamped` to `/streaming_controller/commands`, the commands will be piped to the driver
+By publishing `geometry_msgs::msg::Twist` to `/streaming_controller/commands`, the commands will be piped to the driver
 and streamed to the robot controller.
 
 ## PicknikResetFaultController

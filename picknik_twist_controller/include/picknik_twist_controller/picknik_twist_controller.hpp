@@ -29,13 +29,13 @@
 #include <vector>
 
 #include "controller_interface/controller_interface.hpp"
-#include "geometry_msgs/msg/twist_stamped.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 #include "picknik_twist_controller/visibility_control.h"
 #include "realtime_tools/realtime_buffer.h"
 
 namespace picknik_twist_controller
 {
-using CmdType = geometry_msgs::msg::TwistStamped;
+using CmdType = geometry_msgs::msg::Twist;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 class PicknikTwistController : public controller_interface::ControllerInterface
