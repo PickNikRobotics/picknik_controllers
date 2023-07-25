@@ -2,8 +2,8 @@
 Changelog for package picknik_twist_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2023-07-24)
+------------------
 * Use Twist not TwistStamped (`#11 <https://github.com/PickNikRobotics/picknik_controllers/issues/11>`_)
 * Contributors: Alex Moriarty
 
