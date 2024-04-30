@@ -21,11 +21,11 @@
 #include <utility>
 #include <vector>
 
-#include "diff_drive_controller/diff_drive_controller.hpp"
 #include "hardware_interface/loaned_command_interface.hpp"
 #include "hardware_interface/loaned_state_interface.hpp"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
+#include "picknik_diff_drive_controller/diff_drive_controller.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 using CallbackReturn = controller_interface::CallbackReturn;
@@ -36,7 +36,7 @@ using hardware_interface::LoanedStateInterface;
 using lifecycle_msgs::msg::State;
 using testing::SizeIs;
 
-class TestableDiffDriveController : public diff_drive_controller::DiffDriveController
+class TestableDiffDriveController : public picknik_diff_drive_controller::DiffDriveController
 {
 public:
   using DiffDriveController::DiffDriveController;

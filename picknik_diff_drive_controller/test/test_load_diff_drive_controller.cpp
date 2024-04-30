@@ -34,7 +34,8 @@ TEST(TestLoadDiffDriveController, load_controller)
     executor, "test_controller_manager");
 
   ASSERT_NE(
-    cm.load_controller("test_diff_drive_controller", "diff_drive_controller/DiffDriveController"),
+    cm.load_controller(
+      "test_diff_drive_controller", "picknik_diff_drive_controller/DiffDriveController"),
     nullptr);
 
   rclcpp::shutdown();

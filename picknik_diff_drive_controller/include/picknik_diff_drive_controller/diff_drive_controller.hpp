@@ -27,14 +27,14 @@
 #include <vector>
 
 #include "controller_interface/chainable_controller_interface.hpp"
-#include "diff_drive_controller/odometry.hpp"
-#include "diff_drive_controller/speed_limiter.hpp"
-#include "diff_drive_controller/visibility_control.h"
 #include "geometry_msgs/msg/twist.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
 #include "hardware_interface/handle.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "odometry.hpp"
+#include "picknik_diff_drive_controller/odometry.hpp"
+#include "picknik_diff_drive_controller/speed_limiter.hpp"
+#include "picknik_diff_drive_controller/visibility_control.h"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 #include "realtime_tools/realtime_buffer.h"
@@ -43,7 +43,7 @@
 
 #include "diff_drive_controller_parameters.hpp"
 
-namespace diff_drive_controller
+namespace picknik_diff_drive_controller
 {
 class DiffDriveController : public controller_interface::ChainableControllerInterface
 {
@@ -168,5 +168,5 @@ private:
   void reference_callback(const std::shared_ptr<ControllerTwistReferenceMsg> msg);
   void reference_callback_unstamped(const std::shared_ptr<geometry_msgs::msg::Twist> msg);
 };
-}  // namespace diff_drive_controller
+}  // namespace picknik_diff_drive_controller
 #endif  // DIFF_DRIVE_CONTROLLER__DIFF_DRIVE_CONTROLLER_HPP_

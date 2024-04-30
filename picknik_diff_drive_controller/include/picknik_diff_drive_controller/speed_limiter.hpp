@@ -21,7 +21,7 @@
 
 #include <cmath>
 
-namespace diff_drive_controller
+namespace picknik_diff_drive_controller
 {
 class SpeedLimiter
 {
@@ -100,6 +100,6 @@ private:
   double max_jerk_;
 };
 
-}  // namespace diff_drive_controller
+}  // namespace picknik_diff_drive_controller
 
 #endif  // DIFF_DRIVE_CONTROLLER__SPEED_LIMITER_HPP_

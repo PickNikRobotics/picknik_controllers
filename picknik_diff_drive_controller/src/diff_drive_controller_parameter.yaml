@@ -1,4 +1,4 @@
-diff_drive_controller:
+picknik_diff_drive_controller:
   left_wheel_names: {
     type: string_array,
     default_value: [],

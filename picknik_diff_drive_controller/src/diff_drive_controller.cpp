@@ -22,9 +22,9 @@
 #include <utility>
 #include <vector>
 
-#include "diff_drive_controller/diff_drive_controller.hpp"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
+#include "picknik_diff_drive_controller/diff_drive_controller.hpp"
 #include "rclcpp/logging.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 
@@ -59,7 +59,7 @@ void reset_controller_reference_msg(
 
 }  // namespace
 
-namespace diff_drive_controller
+namespace picknik_diff_drive_controller
 {
 using namespace std::chrono_literals;
 using controller_interface::interface_configuration_type;
@@ -700,9 +700,10 @@ bool DiffDriveController::on_set_chained_mode(bool chained_mode)
   return true || chained_mode;
 }
 
-}  // namespace diff_drive_controller
+}  // namespace picknik_diff_drive_controller
 
 #include "class_loader/register_macro.hpp"
 
 CLASS_LOADER_REGISTER_CLASS(
-  diff_drive_controller::DiffDriveController, controller_interface::ChainableControllerInterface)
+  picknik_diff_drive_controller::DiffDriveController,
+  controller_interface::ChainableControllerInterface)

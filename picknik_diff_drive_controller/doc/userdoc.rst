@@ -8,7 +8,7 @@ diff_drive_controller
 Controller for mobile robots with differential drive.
 
 As input it takes velocity commands for the robot body, which are translated to wheel commands for the differential drive base.
-In addition, this controller exports 3-DOF velocity command interfaces (`position/x`, `position/y`, `position/theta`) for chaining to another controller, for example a JointTrajectoryController. This design directly supports MoveIt's internal representation of the mobile base joint.
+In addition, this controller exports 3-DOF velocity command interfaces (``position/x``, ``position/y``, ``position/theta``) for chaining to another controller, for example a JointTrajectoryController. This design directly supports MoveIt's internal representation of the mobile base joint.
 
 Odometry is computed from hardware feedback and published.
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(diff_drive_controller LANGUAGES CXX)
+project(picknik_diff_drive_controller LANGUAGES CXX)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
   add_compile_options(-Wall -Wextra)
@@ -80,7 +80,7 @@ endif()
 
 install(
   DIRECTORY include/
-  DESTINATION include/diff_drive_controller
+  DESTINATION include/picknik_diff_drive_controller
 )
 install(TARGETS diff_drive_controller diff_drive_controller_parameters
   EXPORT export_diff_drive_controller
