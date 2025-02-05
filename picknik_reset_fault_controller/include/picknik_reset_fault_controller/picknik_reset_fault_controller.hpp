@@ -31,7 +31,7 @@
 #include "example_interfaces/msg/bool.hpp"
 #include "example_interfaces/srv/trigger.hpp"
 #include "picknik_reset_fault_controller/visibility_control.h"
-#include "realtime_tools/realtime_publisher.h"
+#include "realtime_tools/realtime_publisher.hpp"
 
 namespace picknik_reset_fault_controller
 {
