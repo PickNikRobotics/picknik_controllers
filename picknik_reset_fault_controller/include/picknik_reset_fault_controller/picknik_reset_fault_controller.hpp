@@ -32,11 +32,7 @@
 #include "example_interfaces/srv/trigger.hpp"
 #include "picknik_reset_fault_controller/visibility_control.h"
 #include <rclcpp/version.h>
-#if RCLCPP_VERSION_GTE(28, 3, 3)  // Rolling
 #include "realtime_tools/realtime_publisher.hpp"
-#else
-#include "realtime_tools/realtime_publisher.h"
-#endif
 
 namespace picknik_reset_fault_controller
 {
