@@ -31,7 +31,7 @@
 #include "controller_interface/controller_interface.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 #include "picknik_twist_controller/visibility_control.h"
-#include "realtime_tools/realtime_buffer.h"
+#include "realtime_tools/realtime_buffer.hpp"
 
 namespace picknik_twist_controller
 {
