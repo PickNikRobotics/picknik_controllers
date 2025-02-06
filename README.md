@@ -3,9 +3,16 @@
 Package defining custom controllers that are generic and we want to contribute them into ros2_controllers.
 The controllers have been prefixed with `picknik_` so that when they eventually land upstream the prefix can be removed and the versions here will become deprecated.
 
+- `picknik_diff_drive_controller::DiffDriveController`
 - `picknik_twist_controller::PicknikTwistController`
 - `picknik_reset_fault_controller::PicknikResetFaultController`
 
+## DiffDriveController
+Generic ROS2 controller with chaining support for JTC path following.
+The implementation is currently specific to MoveIt (x/y/theta joints), we might eventually break out the velocity tracking into linear and rotational components to bring this upstream to ros2_controllers.
+
+### Usage
+See the [Stretch ROS](https://github.com/PickNikRobotics/stretch_ros) configuration for an example setup, running a JointTrajectoryController and the chained DiffDriveController for computing wheel commands and mocked odometry.
 
 ## PicknikTwistController
 Generic ROS2 controller to forward cartesian twist commands.
