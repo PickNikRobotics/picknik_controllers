@@ -14,25 +14,25 @@ on:
         required: true
         type: string
       ros2_repo_branch:
-        description: 'Branch in the ros2/ros2 repository from which ".repos" should be used. Possible values: master (Rolling), humble, iron, galactic, foxy.'
+        description: 'Branch in the ros2/ros2 repository from which ".repos" should be used. Possible values: master (Rolling), humble, jazzy.'
         default: 'master'
         required: false
         type: string
 
 jobs:
   reusable_ros_tooling_source_build:
-    name: ${{ inputs.ros_distro }} ubuntu-22.04
-    runs-on: ubuntu-22.04
+    name: ${{ inputs.ros_distro }} ubuntu-24.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
     steps:
-      - uses: ros-tooling/setup-ros@0.6.2
+      - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: ${{ inputs.ros_distro }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
-      - uses: ros-tooling/action-ros-ci@0.3.2
+      - uses: ros-tooling/action-ros-ci@v0.3
         with:
           target-ros2-distro: ${{ inputs.ros_distro }}
           # build all packages listed in the meta package
