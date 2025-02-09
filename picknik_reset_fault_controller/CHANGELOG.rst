@@ -2,6 +2,11 @@
 Changelog for package picknik_reset_fault_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix deprecated realtime_tools header imports (`#14 <https://github.com/PickNikRobotics/picknik_controllers/issues/14>`_)
+* Contributors: Sebastian Castro
+
 0.0.3 (2023-07-24)
 ------------------
 
