@@ -2,8 +2,8 @@
 Changelog for package picknik_twist_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.4 (2025-02-09)
+------------------
 * Fix deprecated realtime_tools header imports (`#14 <https://github.com/PickNikRobotics/picknik_controllers/issues/14>`_)
 * Contributors: Sebastian Castro
 
