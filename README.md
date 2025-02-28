@@ -45,7 +45,7 @@ information if robot is currently faulted can be found.
 
 Deactivate all the controllers using robot.
 ```
-ros2 control swithc_controllers --deactivate joint_trajectory_controller gripper_controller
+ros2 control switch_controllers --deactivate joint_trajectory_controller gripper_controller
 ```
 
 Call the service for resetting the fault (`example_interfaces::srv::Trigger`).
@@ -56,7 +56,7 @@ ros2 service call /fault_controller/reset_fault example_interfaces/srv/Trigger
 
 Activate controllers to enable robot control.
 ```
-ros2 control swithc_controllers --activate joint_trajectory_controller gripper_controller
+ros2 control switch_controllers --activate joint_trajectory_controller gripper_controller
 ```
 
 ## Build status
