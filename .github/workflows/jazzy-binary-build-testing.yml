@@ -1,5 +1,6 @@
-name: Iron Semi-Binary Build - testing
-# description: 'Build & test that compiles the main dependencies from source.'
+name: Jazzy Binary Build - testing
+# author: Denis Štogl <denis@stoglrobotics.de>
+# description: 'Build & test all dependencies from released (binary) packages.'
 
 on:
   workflow_dispatch:
@@ -13,13 +14,13 @@ on:
       - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
-    - cron: '33 1 * * *'
+    - cron: '03 1 * * *'
 
 jobs:
-  semi_binary:
+  binary:
     uses: ./.github/workflows/reusable-industrial-ci-with-cache.yml
     with:
-      ros_distro: iron
+      ros_distro: jazzy
       ros_repo: testing
-      upstream_workspace: picknik_controllers.iron.repos
+      upstream_workspace: picknik_controllers-not-released.jazzy.repos
       ref_for_scheduled_build: main
