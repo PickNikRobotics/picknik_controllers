@@ -62,11 +62,10 @@ CallbackReturn PicknikResetFaultController::on_init() { return CallbackReturn::S
 controller_interface::return_type PicknikResetFaultController::update(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-  if (realtime_publisher_ && realtime_publisher_->trylock())
+  if (realtime_publisher_)
   {
-    state_.data = static_cast<bool>(state_interfaces_[StateInterfaces::IN_FAULT].get_value());
-    realtime_publisher_->msg_.data = state_.data;
-    realtime_publisher_->unlockAndPublish();
+    state_.data = static_cast<bool>(state_interfaces_[StateInterfaces::IN_FAULT].get_optional().value());
+    realtime_publisher_->try_publish(state_);
   }
 
   return controller_interface::return_type::OK;
@@ -121,14 +120,14 @@ bool PicknikResetFaultController::resetFault(
 
   RCLCPP_INFO(get_node()->get_logger(), "Trying to reset faults on hardware controller.");
 
-  while (command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_value() ==
+  while (command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_optional().value() ==
          ASYNC_WAITING)
   {
     // Asynchronous wait until the hardware interface has set the io value
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
   }
   resp->success = static_cast<bool>(
-    command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_value());
+    command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_optional().value());
 
   RCLCPP_INFO(
     get_node()->get_logger(), "Resetting fault on hardware controller '%s'!",
