@@ -64,8 +64,7 @@ controller_interface::return_type PicknikResetFaultController::update(
 {
   if (realtime_publisher_)
   {
-    auto state_op =
-      command_interfaces_[CommandInterfaces::RESET_FAULT_ASYNC_SUCCESS].get_optional();
+    auto state_op = state_interfaces_[StateInterfaces::IN_FAULT].get_optional();
     if (state_op.has_value())
     {
       state_.data = static_cast<bool>(state_op.value());
