@@ -1,17 +1,17 @@
-name: Humble Binary Build - testing
+name: Kilted Binary Build - main
 # author: Denis Štogl <denis@stoglrobotics.de>
 # description: 'Build & test all dependencies from released (binary) packages.'
 
 on:
   workflow_dispatch:
     branches:
-      - humble
+      - main
   pull_request:
     branches:
-      - humble
+      - main
   push:
     branches:
-      - humble
+      - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '03 1 * * *'
@@ -20,7 +20,7 @@ jobs:
   binary:
     uses: ./.github/workflows/reusable-industrial-ci-with-cache.yml
     with:
-      ros_distro: humble
-      ros_repo: testing
-      upstream_workspace: picknik_controllers-not-released.humble.repos
-      ref_for_scheduled_build: humble
+      ros_distro: kilted
+      ros_repo: main
+      upstream_workspace: picknik_controllers-not-released.kilted.repos
+      ref_for_scheduled_build: main

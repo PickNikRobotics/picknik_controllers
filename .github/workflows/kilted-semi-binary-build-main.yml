@@ -1,16 +1,16 @@
-name: Humble Semi-Binary Build - humble
-# description: 'Build & test that compiles the humble dependencies from source.'
+name: Kilted Semi-Binary Build - main
+# description: 'Build & test that compiles the main dependencies from source.'
 
 on:
   workflow_dispatch:
     branches:
-      - humble
+      - main
   pull_request:
     branches:
-      - humble
+      - main
   push:
     branches:
-      - humble
+      - main
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '33 1 * * *'
@@ -19,7 +19,7 @@ jobs:
   semi_binary:
     uses: ./.github/workflows/reusable-industrial-ci-with-cache.yml
     with:
-      ros_distro: humble
+      ros_distro: kilted
       ros_repo: main
-      upstream_workspace: picknik_controllers.humble.repos
-      ref_for_scheduled_build: humble
+      upstream_workspace: picknik_controllers.kilted.repos
+      ref_for_scheduled_build: main

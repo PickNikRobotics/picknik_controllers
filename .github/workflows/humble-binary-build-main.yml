@@ -1,17 +1,17 @@
-name: Humble Binary Build - main
+name: Humble Binary Build - humble
 # author: Denis Štogl <denis@stoglrobotics.de>
 # description: 'Build & test all dependencies from released (binary) packages.'
 
 on:
   workflow_dispatch:
     branches:
-      - main
+      - humble
   pull_request:
     branches:
-      - main
+      - humble
   push:
     branches:
-      - main
+      - humble
   schedule:
     # Run every morning to detect flakiness and broken dependencies
     - cron: '03 1 * * *'
@@ -23,4 +23,4 @@ jobs:
       ros_distro: humble
       ros_repo: main
       upstream_workspace: picknik_controllers-not-released.humble.repos
-      ref_for_scheduled_build: main
+      ref_for_scheduled_build: humble
