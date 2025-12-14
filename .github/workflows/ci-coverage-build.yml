@@ -10,7 +10,7 @@ on:
 jobs:
   coverage:
     name: coverage build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
     env:
@@ -29,7 +29,7 @@ jobs:
             picknik_reset_fault_controller
 
           vcs-repo-file-url: |
-            https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/picknik_controllers-not-released.${{ env.ROS_DISTRO }}.repos?token=${{ secrets.GITHUB_TOKEN }}
+            https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/picknik_controllers-not-released.${{ env.ROS_DISTRO }}.repos
           colcon-defaults: |
             {
               "build": {
