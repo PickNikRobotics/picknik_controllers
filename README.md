@@ -59,12 +59,30 @@ Activate controllers to enable robot control.
 ros2 control switch_controllers --activate joint_trajectory_controller gripper_controller
 ```
 
-## Build farm status
+## [Release repository](https://github.com/ros2-gbp/picknik_controllers-release) Status
 
-| Package | Rolling | Jazzy | Kilted | Humble |
-|:-------:|:-------:|:-----:|:------:|:------:|
-| picknik_reset_fault_controller | [![Build Status][Rsrc__prfc_b]][Rsrc__prfc] <br /> [![Build Status][Rbin_64__prfc_b]][Rbin_64__prfc] <br /> [![Build Status][Rbin_v8__prfc_b]][Rbin_v8__prfc] | [![Build Status][Jsrc__prfc_b]][Jsrc__prfc] <br /> [![Build Status][Jbin_64__prfc_b]][Jbin_64__prfc] <br /> [![Build Status][Jbin_v8__prfc_b]][Jbin_v8__prfc] | [![Build Status][Ksrc__prfc_b]][Ksrc__prfc] <br /> [![Build Status][Kbin_64__prfc_b]][Kbin_64__prfc] <br /> [![Build Status][Kbin_v8__prfc_b]][Kbin_v8__prfc] | [![Build Status][Hsrc__prfc_b]][Hsrc__prfc] <br /> [![Build Status][Hbin_64__prfc_b]][Hbin_64__prfc] <br /> [![Build Status][Hbin_v8__prfc_b]][Hbin_v8__prfc] |
-| picknik_twist_controller | [![Build Status][Rsrc__ptc_b]][Rsrc__ptc] <br /> [![Build Status][Rbin_64__ptc_b]][Rbin_64__ptc] <br /> [![Build Status][Rbin_v8__ptc_b]][Rbin_v8__ptc] | [![Build Status][Jsrc__ptc_b]][Jsrc__ptc] <br /> [![Build Status][Jbin_64__ptc_b]][Jbin_64__ptc] <br /> [![Build Status][Jbin_v8__ptc_b]][Jbin_v8__ptc] | [![Build Status][Ksrc__ptc_b]][Ksrc__ptc] <br /> [![Build Status][Kbin_64__ptc_b]][Kbin_64__ptc] <br /> [![Build Status][Kbin_v8__ptc_b]][Kbin_v8__ptc] | [![Build Status][Hsrc__ptc_b]][Hsrc__ptc] <br /> [![Build Status][Hbin_64__ptc_b]][Hbin_64__ptc] <br /> [![Build Status][Hbin_v8__ptc_b]][Hbin_v8__ptc] |
+<!-- https://repo.ros2.org/status_page/ros_rolling_default.html?q=picknik_twist_controller -->
+
+| Package | [Rolling][r_rel_summary] | [Jazzy][j_rel_summary] | [Kilted][k_rel_summary] | [Humble][h_rel_summary] |
+|:-------:|:---------------------:|:-------------------:|:--------------------:|:--------------------:|
+| [picknik_reset_fault_controller](https://index.ros.org/p/picknik_reset_fault_controller) | [![Release Src Status][Rsrc__prfc_b]][Rsrc__prfc] <br /> [![Release x86_64 Status][Rbin_64__prfc_b]][Rbin_64__prfc] <br /> [![Release arm64 Status][Rbin_v8__prfc_b]][Rbin_v8__prfc] <br /> [Docs][r_prfc_docs] | [![Release Src Status][Jsrc__prfc_b]][Jsrc__prfc] <br /> [![Release x86_64 Status][Jbin_64__prfc_b]][Jbin_64__prfc] <br /> [![Release arm64 Status][Jbin_v8__prfc_b]][Jbin_v8__prfc] <br /> [Docs][j_prfc_docs] | [![Release Src Status][Ksrc__prfc_b]][Ksrc__prfc] <br /> [![Release x86_64 Status][Kbin_64__prfc_b]][Kbin_64__prfc] <br /> [![Release arm64 Status][Kbin_v8__prfc_b]][Kbin_v8__prfc] <br /> [Docs][k_prfc_docs] | [![Release Src Status][Hsrc__prfc_b]][Hsrc__prfc] <br /> [![Release x86_64 Status][Hbin_64__prfc_b]][Hbin_64__prfc] <br /> [![Release arm64 Status][Hbin_v8__prfc_b]][Hbin_v8__prfc] <br /> [Docs][h_prfc_docs] |
+| [picknik_twist_controller](https://index.ros.org/p/picknik_twist_controller) | [![Release Src Status][Rsrc__ptc_b]][Rsrc__ptc] <br /> [![Release x86_64 Status][Rbin_64__ptc_b]][Rbin_64__ptc] <br /> [![Release arm64 Status][Rbin_v8__ptc_b]][Rbin_v8__ptc] <br /> [Docs][r_ptc_docs] | [![Release Src Status][Jsrc__ptc_b]][Jsrc__ptc] <br /> [![Release x86_64 Status][Jbin_64__ptc_b]][Jbin_64__ptc] <br /> [![Release arm64 Status][Jbin_v8__ptc_b]][Jbin_v8__ptc] <br />  [Docs][j_ptc_docs]| [![Release Src Status][Ksrc__ptc_b]][Ksrc__ptc] <br /> [![Release x86_64 Status][Kbin_64__ptc_b]][Kbin_64__ptc] <br /> [![Release arm64 Status][Kbin_v8__ptc_b]][Kbin_v8__ptc] <br /> [Docs][k_ptc_docs] | [![Release Src Status][Hsrc__ptc_b]][Hsrc__ptc] <br /> [![Release x86_64 Status][Hbin_64__ptc_b]][Hbin_64__ptc] <br /> [![Release arm64 Status][Hbin_v8__ptc_b]][Hbin_v8__ptc]  <br /> [Docs][r_ptc_docs] |
+
+<!-- repo.ros2.org pages -->
+[r_rel_summary]: https://repo.ros2.org/status_page/ros_rolling_default.html?q=picknik_reset_fault_controller%7Cpicknik_twist_controller
+[j_rel_summary]: https://repo.ros2.org/status_page/ros_jazzy_default.html?q=picknik_reset_fault_controller%7Cpicknik_twist_controller
+[k_rel_summary]: https://repo.ros2.org/status_page/ros_kilted_default.html?q=picknik_reset_fault_controller%7Cpicknik_twist_controller
+[h_rel_summary]: https://repo.ros2.org/status_page/ros_humble_default.html?q=picknik_reset_fault_controller%7Cpicknik_twist_controller
+
+<!-- docs.ros.org pages -->
+[r_prfc_docs]: https://docs.ros.org/en/rolling/p/picknik_reset_fault_controller
+[j_prfc_docs]: https://docs.ros.org/en/jazzy/p/picknik_reset_fault_controller
+[k_prfc_docs]: https://docs.ros.org/en/kilted/p/picknik_reset_fault_controller
+[h_prfc_docs]: https://docs.ros.org/en/humble/p/picknik_reset_fault_controller
+[r_ptc_docs]: https://docs.ros.org/en/rolling/p/picknik_twist_controller
+[j_ptc_docs]: https://docs.ros.org/en/jazzy/p/picknik_twist_controller
+[k_ptc_docs]: https://docs.ros.org/en/kilted/p/picknik_twist_controller
+[h_ptc_docs]: https://docs.ros.org/en/humble/p/picknik_twist_controller
 
 <!-- picknik_reset_fault_controller statuses -->
 [Rsrc__prfc]: https://build.ros2.org/job/Rsrc_uN__picknik_reset_fault_controller__ubuntu_noble__source
@@ -81,16 +99,16 @@ ros2 control switch_controllers --activate joint_trajectory_controller gripper_c
 [Hbin_v8__prfc]: https://build.ros2.org/job/Hbin_ujv8_uJv8__picknik_reset_fault_controller__ubuntu_jammy_arm64__binary
 <!-- picknik_reset_fault_controller status badges -->
 [Rsrc__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Rsrc_uN__picknik_reset_fault_controller__ubuntu_noble__source&subject=src
-[Rbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__picknik_reset_fault_controller__ubuntu_noble_amd64__binary&subject=amd64_bin
+[Rbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__picknik_reset_fault_controller__ubuntu_noble_amd64__binary&subject=x86_64_bin
 [Rbin_v8__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Rbin_unv8_uNv8__picknik_reset_fault_controller__ubuntu_noble_arm64__binary&subject=arm64_bin
 [Jsrc__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Jsrc_uN__picknik_reset_fault_controller__ubuntu_noble__source&subject=src
-[Jbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__picknik_reset_fault_controller__ubuntu_noble_amd64__binary&subject=amd64_bin
+[Jbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__picknik_reset_fault_controller__ubuntu_noble_amd64__binary&subject=x86_64_bin
 [Jbin_v8__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Jbin_unv8_uNv8__picknik_reset_fault_controller__ubuntu_noble_arm64__binary&subject=arm64_bin
 [Ksrc__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Ksrc_uN__picknik_reset_fault_controller__ubuntu_noble__source&subject=src
-[Kbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Kbin_uN64__picknik_reset_fault_controller__ubuntu_noble_amd64__binary&subject=amd64_bin
+[Kbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Kbin_uN64__picknik_reset_fault_controller__ubuntu_noble_amd64__binary&subject=x86_64_bin
 [Kbin_v8__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Kbin_unv8_uNv8__picknik_reset_fault_controller__ubuntu_noble_arm64__binary&subject=arm64_bin
 [Hsrc__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Hsrc_uJ__picknik_reset_fault_controller__ubuntu_jammy__source&subject=src
-[Hbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__picknik_reset_fault_controller__ubuntu_jammy_amd64__binary&subject=amd64_bin
+[Hbin_64__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__picknik_reset_fault_controller__ubuntu_jammy_amd64__binary&subject=x86_64_bin
 [Hbin_v8__prfc_b]: https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__picknik_reset_fault_controller__ubuntu_jammy_arm64__binary&subject=arm64_bin
 <!-- picknik_twist_controller statuses -->
 [Rsrc__ptc]: https://build.ros2.org/job/Rsrc_uN__picknik_twist_controller__ubuntu_noble__source
@@ -107,19 +125,44 @@ ros2 control switch_controllers --activate joint_trajectory_controller gripper_c
 [Hbin_v8__ptc]: https://build.ros2.org/job/Hbin_ujv8_uJv8__picknik_twist_controller__ubuntu_jammy_arm64__binary
 <!-- picknik_twist_controller status badges -->
 [Rsrc__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Rsrc_uN__picknik_twist_controller__ubuntu_noble__source&subject=src
-[Rbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__picknik_twist_controller__ubuntu_noble_amd64__binary&subject=amd64_bin
+[Rbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__picknik_twist_controller__ubuntu_noble_amd64__binary&subject=x86_64_bin
 [Rbin_v8__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Rbin_unv8_uNv8__picknik_twist_controller__ubuntu_noble_arm64__binary&subject=arm64_bin
 [Jsrc__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Jsrc_uN__picknik_twist_controller__ubuntu_noble__source&subject=src
-[Jbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__picknik_twist_controller__ubuntu_noble_amd64__binary&subject=amd64_bin
+[Jbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__picknik_twist_controller__ubuntu_noble_amd64__binary&subject=x86_64_bin
 [Jbin_v8__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Jbin_unv8_uNv8__picknik_twist_controller__ubuntu_noble_arm64__binary&subject=arm64_bin
 [Ksrc__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Ksrc_uN__picknik_twist_controller__ubuntu_noble__source&subject=src
-[Kbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Kbin_uN64__picknik_twist_controller__ubuntu_noble_amd64__binary&subject=amd64_bin
+[Kbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Kbin_uN64__picknik_twist_controller__ubuntu_noble_amd64__binary&subject=x86_64_bin
 [Kbin_v8__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Kbin_unv8_uNv8__picknik_twist_controller__ubuntu_noble_arm64__binary&subject=arm64_bin
 [Hsrc__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Hsrc_uJ__picknik_twist_controller__ubuntu_jammy__source&subject=src
-[Hbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__picknik_twist_controller__ubuntu_jammy_amd64__binary&subject=amd64_bin
+[Hbin_64__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__picknik_twist_controller__ubuntu_jammy_amd64__binary&subject=x86_64_bin
 [Hbin_v8__ptc_b]: https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__picknik_twist_controller__ubuntu_jammy_arm64__binary&subject=arm64_bin
 
-## CI status
+## [Source repository](https://github.com/PickNikRobotics/picknik_controllers) Status
+
+
+
+[h_bin_main]: 
+[h_bin_testing]
+[h_semi_bin_main]
+[h_semi_bin_testing]
+[h_src_testing]
+
+
+| Dependencies Repository | [Rolling][r_src_url] | [Jazzy][j_src_url] | [Kilted][k_src_url] | [Humble][h_src_url] |
+|:-----------------:|:---------------------:|:-------------------:|:--------------------:|:--------------------:|
+| Release-Main Bin |
+| Release-Testing Bin |
+| Mixed Release-Main Bin & Upstream Src |
+| Mixed Release-Testing Bin & Upstream Src |
+| Upstream Src |
+
+
+[r_src_url]: https://github.com/PickNikRobotics/picknik_controllers/tree/rolling
+[j_src_url]: https://github.com/PickNikRobotics/picknik_controllers/tree/jazzy
+[k_src_url]: https://github.com/PickNikRobotics/picknik_controllers/tree/kilted
+[h_src_url]: https://github.com/PickNikRobotics/picknik_controllers/tree/humble
+
+| ROS2 Distro | 
 
 ROS2 Distro | Branch | Build status | Documentation | Released packages
 :---------: | :----: | :----------: | :-----------: | :---------------:
@@ -139,7 +182,6 @@ ROS2 Distro | Branch | Build status | Documentation | Released packages
 
 **NOTE**: There are three build stages checking current and future compatibility of the package.
 
-[Detailed build status](.github/workflows/README.md)
 
 1. Binary builds - against released packages (main and testing) in ROS distributions. Shows that direct local build is possible.
 
