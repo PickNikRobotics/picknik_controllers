@@ -28,8 +28,11 @@ target_include_directories(${PROJECT_NAME} PRIVATE
   include
 )
 
-ament_target_dependencies(${PROJECT_NAME}
-  ${THIS_PACKAGE_INCLUDE_DEPENDS}
+target_link_libraries(${PROJECT_NAME}
+  ${controller_interface_TARGETS}
+  ${geometry_msgs_TARGETS}
+  ${example_interfaces_TARGETS}
+  realtime_tools::realtime_tools
 )
 
 # Causes the visibility macros to use dllexport rather than dllimport,
