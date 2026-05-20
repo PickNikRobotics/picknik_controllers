@@ -21,6 +21,6 @@ jobs:
     uses: ./.github/workflows/reusable-industrial-ci-with-cache.yml
     with:
       ros_distro: rolling
-      ros_repo: testing
+      ros_repo: main
       upstream_workspace: picknik_controllers-not-released.rolling.repos
       ref_for_scheduled_build: main
