@@ -14,7 +14,7 @@ jobs:
     # Some Rolling-on-Resolute packages currently only exist in ros2-testing apt.
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ros-industrial/industrial_ci@master
         env:
           ROS_DISTRO: rolling
