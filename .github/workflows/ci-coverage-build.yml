@@ -12,9 +12,17 @@ jobs:
     name: coverage build
     runs-on: ubuntu-24.04
     # Non-blocking while Rolling completes its Noble → Resolute base-OS transition.
-    # ros-tooling/action-ros-ci on the noble runner cannot resolve current Rolling debs
-    # (e.g. python3-ament-package chain is broken); revisit when a resolute GitHub runner
-    # or a fixed action release lands.
+    #
+    # Observed 2026-07 on Ubuntu 24.04 (noble) runners: rosdep can't resolve
+    # `realtime_tools` for noble, so `apt-get install` skips ros2_control's runtime
+    # deps; the subsequent `colcon build` then fails at
+    # `find_package(controller_interface REQUIRED)` in CMakeLists.txt. Upstream root
+    # cause is that Rolling has migrated to Resolute and its dep chain no longer
+    # resolves against noble apt. Not fixable at the workflow level here.
+    #
+    # Revisit when either (a) `ros-tooling/action-ros-ci` releases a version that
+    # switches its runner base to Resolute, or (b) we wrap this workflow in
+    # `industrial_ci` with `OS_CODE_NAME: resolute` (matching moveit2's approach).
     continue-on-error: true
     strategy:
       fail-fast: false
