@@ -11,6 +11,11 @@ jobs:
   coverage:
     name: coverage build
     runs-on: ubuntu-24.04
+    # Non-blocking while Rolling completes its Noble → Resolute base-OS transition.
+    # ros-tooling/action-ros-ci on the noble runner cannot resolve current Rolling debs
+    # (e.g. python3-ament-package chain is broken); revisit when a resolute GitHub runner
+    # or a fixed action release lands.
+    continue-on-error: true
     strategy:
       fail-fast: false
     env:
