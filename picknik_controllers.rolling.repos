@@ -1,0 +1,19 @@
+# Immediate dependencies of picknik_reset_fault_controller and
+# picknik_twist_controller, pulled from their development branches for the
+# tier-3 "semi-binary" job in .github/workflows/build_and_test.yaml.
+#
+# Everything else these packages depend on (rclcpp, geometry_msgs,
+# example_interfaces) is core ROS and comes from debs.
+#
+# This file was previously a commented-out placeholder, which made the
+# semi-binary job byte-identical to the binary job -- the middle rung of the
+# lookahead ladder reported green without testing anything.
+repositories:
+  ros2_control:
+    type: git
+    url: https://github.com/ros-controls/ros2_control.git
+    version: master
+  realtime_tools:
+    type: git
+    url: https://github.com/ros-controls/realtime_tools.git
+    version: master

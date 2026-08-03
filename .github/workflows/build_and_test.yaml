@@ -1,10 +1,15 @@
 # This config uses industrial_ci (https://github.com/ros-industrial/industrial_ci.git).
 # For troubleshooting, see readme (https://github.com/ros-industrial/industrial_ci/blob/master/README.rst)
 #
-# Replaces 20 per-distro workflow files and 2 reusable workflows. Deliberately
-# has NO `schedule:` trigger: GitHub auto-disables cron-triggered workflows after
-# 60 days of repo inactivity, which is what silently took every build job in this
-# repo offline between 2026-03 and 2026-08.
+# Replaces 20 per-distro workflow files and 2 reusable workflows with one matrix.
+#
+# Deliberately has NO `schedule:` trigger. GitHub auto-disables cron-triggered
+# workflows after 60 days of repo inactivity, and it disables the whole workflow,
+# not just the cron -- which is what silently took every build job in this repo
+# offline between 2026-03 and 2026-08.
+#
+# The three-tier lookahead from the original stogl-robotics layout is preserved
+# and, for the first time, actually functional. See .github/workflows/README.md.
 
 name: Build and Test
 
@@ -25,9 +30,15 @@ jobs:
       fail-fast: false
       matrix:
         env:
+          # ---------------------------------------------------------------
+          # Tier 1 -- binary: build against released debs in `main` apt.
+          # "Can a user build this today?" These are the jobs that gate merges.
+          # ---------------------------------------------------------------
+          #
           # humble is NOT built here. `main` dropped humble support in 49a5270
-          # after the ros2_control API break; humble is served by the `humble`
-          # branch and its own workflow.
+          # after the ros2_control API break -- humble's hardware_interface has
+          # no `get_optional()`. humble is served by the `humble` branch and its
+          # own workflow.
           #
           # This is meant to be temporary. Once `main` carries source-level
           # compatibility guards per moveit2#3751, humble comes back as one more
@@ -46,13 +57,46 @@ jobs:
           - ROS_DISTRO: lyrical
             ROS_REPO: main
             OS_CODE_NAME: resolute
-          # Rolling's `main` apt has no Resolute packages yet, so track
-          # `testing`. Pin OS_CODE_NAME rather than trusting industrial_ci's
-          # default, which has moved once already. Non-blocking until Rolling
-          # promotes to main apt; lyrical above is the gate that must stay green.
+
+          # ---------------------------------------------------------------
+          # Tier 2 -- binary against `testing` apt: what breaks at the NEXT
+          # sync. Non-blocking on purpose: an upstream regression staged for
+          # release is something we want to see, not something that should
+          # block an unrelated PR. This repo has already been through a
+          # "7 PRs blocked on an ecosystem break" episode.
+          # ---------------------------------------------------------------
+          - ROS_DISTRO: jazzy
+            ROS_REPO: testing
+            NONBLOCKING: true
+          - ROS_DISTRO: kilted
+            ROS_REPO: testing
+            NONBLOCKING: true
+          - ROS_DISTRO: lyrical
+            ROS_REPO: testing
+            OS_CODE_NAME: resolute
+            NONBLOCKING: true
+          # Rolling's `main` apt has no Resolute packages yet, so rolling only
+          # exists at this tier. Pin OS_CODE_NAME rather than trusting
+          # industrial_ci's default, which has moved once already.
           - ROS_DISTRO: rolling
             ROS_REPO: testing
             OS_CODE_NAME: resolute
+            NONBLOCKING: true
+
+          # ---------------------------------------------------------------
+          # Tier 3 -- semi-binary: core ROS from debs, but our *immediate*
+          # dependencies (ros2_control, realtime_tools) built from their
+          # development branches. This is the mid-future signal: it fails weeks
+          # before a breaking upstream change reaches any apt repo.
+          #
+          # This is the tier that would have caught the removal of
+          # LoanedCommandInterface::get_value() ahead of time instead of at
+          # buildfarm-release time.
+          # ---------------------------------------------------------------
+          - ROS_DISTRO: rolling
+            ROS_REPO: testing
+            OS_CODE_NAME: resolute
+            UPSTREAM_WORKSPACE: picknik_controllers.rolling.repos
             NONBLOCKING: true
 
     env:
@@ -60,11 +104,19 @@ jobs:
       TARGET_CMAKE_ARGS: >
         -DCMAKE_BUILD_TYPE=${{ matrix.env.CCOV && 'Debug' || 'Release'}}
         ${{ matrix.env.CCOV && '-DCMAKE_CXX_FLAGS="--coverage" --no-warn-unused-cli' || '' }}
+      # Only meaningful for the tier-3 job. `upstream_ws` is restored from cache
+      # with different ownership than the container user, so vcs trips git's
+      # dubious-ownership check. Written directly rather than via `git config`
+      # because git is not installed yet at AFTER_INIT on a bare OS image.
+      AFTER_INIT: printf '[safe]\n\tdirectory = *\n' >> ~/.gitconfig
+      # Refresh the cached upstream checkout. Drift is desirable here -- tracking
+      # the upstream development branches is the entire point of tier 3.
+      AFTER_SETUP_UPSTREAM_WORKSPACE: ${{ matrix.env.UPSTREAM_WORKSPACE && 'vcs pull $BASEDIR/upstream_ws/src' || '' }}
       CCACHE_DIR: ${{ github.workspace }}/.ccache
       BASEDIR: ${{ github.workspace }}/.work
-      CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.CCOV && '-ccov' || '' }}
+      CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.UPSTREAM_WORKSPACE && '-upstream' || '' }}${{ matrix.env.CCOV && '-ccov' || '' }}
 
-    name: "${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.CCOV && ' + ccov' || ''}}"
+    name: "${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.UPSTREAM_WORKSPACE && ' + upstream-source' || '' }}${{ matrix.env.CCOV && ' + ccov' || ''}}"
     runs-on: ubuntu-latest
     # Valid here because this is a step-based job. It is silently ignored on a
     # job that calls a reusable workflow via `uses:` -- the trap that broke
@@ -72,6 +124,15 @@ jobs:
     continue-on-error: ${{ matrix.env.NONBLOCKING || false }}
     steps:
       - uses: actions/checkout@v4
+      - name: cache upstream_ws
+        if: ${{ matrix.env.UPSTREAM_WORKSPACE }}
+        uses: actions/cache@v4
+        with:
+          save-always: true
+          path: ${{ env.BASEDIR }}/upstream_ws
+          key: upstream_ws-${{ env.CACHE_PREFIX }}-${{ hashFiles(matrix.env.UPSTREAM_WORKSPACE) }}-${{ github.run_id }}
+          restore-keys: |
+            upstream_ws-${{ env.CACHE_PREFIX }}-${{ hashFiles(matrix.env.UPSTREAM_WORKSPACE) }}
       # The target directory cache doesn't include the source directory because
       # that comes from the checkout. See "prepare target_ws for cache" below.
       - name: cache target_ws
@@ -99,7 +160,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: test-results-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
+          name: test-results-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.UPSTREAM_WORKSPACE && '-upstream' || '' }}
           path: ${{ env.BASEDIR }}/target_ws/**/test_results/**/*.xml
       - name: upload codecov report
         uses: codecov/codecov-action@v4
