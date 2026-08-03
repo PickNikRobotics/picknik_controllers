@@ -9,6 +9,7 @@ on:
 
 jobs:
   abi_check:
+    name: jazzy-abi
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
