@@ -1,0 +1,115 @@
+# This config uses industrial_ci (https://github.com/ros-industrial/industrial_ci.git).
+# For troubleshooting, see readme (https://github.com/ros-industrial/industrial_ci/blob/master/README.rst)
+#
+# Replaces 20 per-distro workflow files and 2 reusable workflows. Deliberately
+# has NO `schedule:` trigger: GitHub auto-disables cron-triggered workflows after
+# 60 days of repo inactivity, which is what silently took every build job in this
+# repo offline between 2026-03 and 2026-08.
+
+name: Build and Test
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  industrial_ci:
+    strategy:
+      # Without this, one failing job cancels its siblings before they report,
+      # so a job broken by the environment discards results that were still good.
+      fail-fast: false
+      matrix:
+        env:
+          # humble is NOT built here. `main` dropped humble support in 49a5270
+          # after the ros2_control API break; humble is served by the `humble`
+          # branch and its own workflow.
+          #
+          # This is meant to be temporary. Once `main` carries source-level
+          # compatibility guards per moveit2#3751, humble comes back as one more
+          # entry in this list and the `humble` branch retires. The matrix is
+          # shaped so that is a one-line change, not a restructure.
+          - ROS_DISTRO: jazzy
+            ROS_REPO: main
+          - ROS_DISTRO: kilted
+            ROS_REPO: main
+            CCOV: true
+          # lyrical is Ubuntu Resolute AND released, so its `main` apt is
+          # populated -- ros2_control 6.8.0 and realtime_tools 5.2.0 are both
+          # there. Every dependency this repo has is available, so this is a
+          # BLOCKING Resolute gate. That is the job that would have caught the
+          # break which got us un-released from rolling.
+          - ROS_DISTRO: lyrical
+            ROS_REPO: main
+            OS_CODE_NAME: resolute
+          # Rolling's `main` apt has no Resolute packages yet, so track
+          # `testing`. Pin OS_CODE_NAME rather than trusting industrial_ci's
+          # default, which has moved once already. Non-blocking until Rolling
+          # promotes to main apt; lyrical above is the gate that must stay green.
+          - ROS_DISTRO: rolling
+            ROS_REPO: testing
+            OS_CODE_NAME: resolute
+            NONBLOCKING: true
+
+    env:
+      AFTER_RUN_TARGET_TEST: ${{ matrix.env.CCOV && './.ci.prepare_codecov' || '' }}
+      TARGET_CMAKE_ARGS: >
+        -DCMAKE_BUILD_TYPE=${{ matrix.env.CCOV && 'Debug' || 'Release'}}
+        ${{ matrix.env.CCOV && '-DCMAKE_CXX_FLAGS="--coverage" --no-warn-unused-cli' || '' }}
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
+      BASEDIR: ${{ github.workspace }}/.work
+      CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.CCOV && '-ccov' || '' }}
+
+    name: "${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.CCOV && ' + ccov' || ''}}"
+    runs-on: ubuntu-latest
+    # Valid here because this is a step-based job. It is silently ignored on a
+    # job that calls a reusable workflow via `uses:` -- the trap that broke
+    # ros2_robotiq_gripper's workflow file until #129.
+    continue-on-error: ${{ matrix.env.NONBLOCKING || false }}
+    steps:
+      - uses: actions/checkout@v4
+      # The target directory cache doesn't include the source directory because
+      # that comes from the checkout. See "prepare target_ws for cache" below.
+      - name: cache target_ws
+        if: ${{ ! matrix.env.CCOV }}
+        uses: actions/cache@v4
+        with:
+          save-always: true
+          path: ${{ env.BASEDIR }}/target_ws
+          key: target_ws-${{ env.CACHE_PREFIX }}-${{ hashFiles('**/CMakeLists.txt', '**/package.xml') }}-${{ github.run_id }}
+          restore-keys: |
+            target_ws-${{ env.CACHE_PREFIX }}-${{ hashFiles('**/CMakeLists.txt', '**/package.xml') }}
+      - name: cache ccache
+        uses: actions/cache@v4
+        with:
+          save-always: true
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ env.CACHE_PREFIX }}-${{ github.sha }}-${{ github.run_id }}
+          restore-keys: |
+            ccache-${{ env.CACHE_PREFIX }}-${{ github.sha }}
+            ccache-${{ env.CACHE_PREFIX }}
+      - name: industrial_ci
+        uses: ros-industrial/industrial_ci@master
+        env: ${{ matrix.env }}
+      - name: upload test artifacts (on failure)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
+          path: ${{ env.BASEDIR }}/target_ws/**/test_results/**/*.xml
+      - name: upload codecov report
+        uses: codecov/codecov-action@v4
+        if: ${{ matrix.env.CCOV }}
+        with:
+          files: ${{ env.BASEDIR }}/coverage.info
+      - name: prepare target_ws for cache
+        if: ${{ always() && ! matrix.env.CCOV }}
+        run: |
+          du -sh ${{ env.BASEDIR }}/target_ws
+          sudo find ${{ env.BASEDIR }}/target_ws -wholename '*/test_results/*' -delete
+          sudo rm -rf ${{ env.BASEDIR }}/target_ws/src
+          du -sh ${{ env.BASEDIR }}/target_ws
