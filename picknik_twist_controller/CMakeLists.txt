@@ -9,6 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_ros REQUIRED)
 find_package(controller_interface REQUIRED)
+find_package(hardware_interface REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(example_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -16,6 +17,7 @@ find_package(realtime_tools REQUIRED)
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   controller_interface
+  hardware_interface
   geometry_msgs
   example_interfaces
   realtime_tools
@@ -30,6 +32,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME}
   ${controller_interface_TARGETS}
+  ${hardware_interface_TARGETS}
   ${geometry_msgs_TARGETS}
   ${example_interfaces_TARGETS}
   realtime_tools::realtime_tools
