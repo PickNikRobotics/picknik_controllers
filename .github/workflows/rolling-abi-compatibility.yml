@@ -9,6 +9,7 @@ on:
 
 jobs:
   abi_check:
+    name: rolling-abi
     runs-on: ubuntu-latest
     # Non-blocking while Rolling completes its Noble → Resolute base-OS transition.
     # Some Rolling-on-Resolute packages currently only exist in ros2-testing apt.
