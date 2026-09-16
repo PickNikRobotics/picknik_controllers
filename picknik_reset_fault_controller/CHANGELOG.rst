@@ -2,8 +2,8 @@
 Changelog for package picknik_reset_fault_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.5 (2026-09-16)
+------------------
 * Declare the hardware_interface dependency explicitly (`#39 <https://github.com/PickNikRobotics/picknik_controllers/issues/39>`_)
   Both controllers include <hardware_interface/loaned_command_interface.hpp> and
   name hardware_interface::LoanedCommandInterface directly, but neither declared
